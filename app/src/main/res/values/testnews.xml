@@ -1,0 +1,98 @@
+<resources>
+    <string-array name="news_title">
+        <item>我校省木业平台组织农业组行业平台一行赴开化调研对接 助推绿水青山变为金山</item>
+        <item>我校参加省政协科技下乡活动</item>
+        <item>“千万农民素质提升工程”2015年省级培训项目——创富好青年知识更新培训班在</item>
+        <item>浙江农林大学首届“鸿杉杯”乒乓球团体邀请赛总决赛举行</item>
+        <item>校第五届“钟声杯”教职工羽毛球比赛举办</item>
+        <item>省教育厅专家组完成对我校学生体质健康抽测工作</item>
+        <item>浙江省农产品品质改良技术研究重点实验室通过验收</item>
+        <item>周国模参观文化学院学生书画联展</item>
+        <item>学校开展“五一”放假前校园安全隐患排查</item>
+        <item>周国模走访林生院毕业班学生寝室</item>
+        <item>“传承五四精神 放飞青春梦想”——校2015年“五四”表彰大会暨青年合唱比赛</item>
+        <item>以案说纪，以案明纪，以案正风——学校召开反腐倡廉警示教育会</item>
+        <item>学校举办研究生研究会授牌仪式</item>
+        <item>学校召开本科教学工作会议</item>
+        <item>学校召开思政工作会 研讨文化校园建设工作</item>
+        <item>学校召开文化校园建设工作推进会</item>
+        <item>第七届研究生“开石”文化节开幕</item>
+        <item>“绿色低碳 节能减排”校第八届生态文化节开幕</item>
+        <item>学校召开学科建设专门委员会会议</item>
+        <item>浙江省教育后勤协会行政与人力资源委员会2014年年会暨更名大会在我校召开</item>
+        <item>我校获批汉语水平考试（HSK）考点</item>
+
+    </string-array>
+    <string-array name="news_time">
+        <item>2015-05-14</item>
+        <item>2015-05-13</item>
+        <item>2015-05-13</item>
+        <item>2015-05-12</item>
+        <item>2015-05-11</item>
+        <item>2015-05-06</item>
+        <item>2015-05-04</item>
+        <item>2015-05-04</item>
+        <item>2015-04-30</item>
+        <item>2015-04-29</item>
+        <item>2015-04-28</item>
+        <item>2015-04-27</item>
+        <item>2015-04-27</item>
+        <item>2015-04-23</item>
+        <item>2015-04-23</item>
+        <item>2015-04-23</item>
+        <item>2015-04-23</item>
+        <item>2015-04-22</item>
+        <item>2015-04-21</item>
+        <item>2015-04-21</item>
+        <item>2015-04-21</item>
+
+    </string-array>
+    <string-array name="news_author">
+        <item>李海斌</item>
+        <item>罗从军</item>
+        <item>许珊</item>
+        <item>无</item>
+        <item>俞以撒</item>
+        <item>肖兆龙</item>
+        <item>臧运祥</item>
+        <item>校团委 文化学院</item>
+        <item>孙晓民</item>
+        <item>詹斌</item>
+        <item>包林帆 吴玉诗</item>
+        <item>于海燕</item>
+        <item>戎幸</item>
+        <item>陆文冕</item>
+        <item>王守先</item>
+        <item>无</item>
+        <item>戎幸</item>
+        <item>方殷杰</item>
+        <item>魏玲玲</item>
+        <item>吴佳烨</item>
+        <item>何洁</item>
+
+    </string-array>
+    <string-array name="news_click">
+        <item>51</item>
+        <item>78</item>
+        <item>72</item>
+        <item>161</item>
+        <item>161</item>
+        <item>153</item>
+        <item>172</item>
+        <item>263</item>
+        <item>124</item>
+        <item>195</item>
+        <item>235</item>
+        <item>145</item>
+        <item>134</item>
+        <item>167</item>
+        <item>155</item>
+        <item>133</item>
+        <item>123</item>
+        <item>116</item>
+        <item>116</item>
+        <item>95</item>
+        <item>103</item>
+
+    </string-array>
+</resources>

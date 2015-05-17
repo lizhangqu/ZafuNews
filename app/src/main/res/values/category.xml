@@ -1,0 +1,42 @@
+<resources>
+    <string-array name="category_title">
+        <item>学校要闻</item>
+        <item>综合新闻</item>
+        <item>部门传真</item>
+        <item>学院快讯</item>
+        <item>图片新闻</item>
+        <item>创新创业</item>
+        <item>学术动态</item>
+        <item>师生风采</item>
+       <!-- <item>专题新闻</item>-->
+       <!-- <item>视频新闻</item>-->
+        <item>媒体关注</item>
+        <item>菁菁校园</item>
+        <item>农林信息</item>
+        <item>高教视野</item>
+        <item>科技资讯</item>
+        <item>天目讲会</item>
+        <item>通知公告</item>
+       <!-- <item>下载中心</item>-->
+    </string-array>
+    <string-array name="category_url">
+        <item>http://news.zafu.edu.cn/articles/3/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/75/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/39/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/53/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/6/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/10/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/54/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/7/?page=</item>
+       <!-- <item>http://news.zafu.edu.cn/articles/74/special/?page=</item>-->
+        <!--<item>http://news.zafu.edu.cn/articles/9/?page=</item>-->
+        <item>http://news.zafu.edu.cn/articles/59/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/79/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/60/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/62/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/61/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/77/?page=</item>
+        <item>http://news.zafu.edu.cn/articles/63/?page=</item>
+       <!-- <item>http://news.zafu.edu.cn/sub/0301/66/?page=</item>-->
+    </string-array>
+</resources>
