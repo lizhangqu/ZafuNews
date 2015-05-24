@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jayfeng.lesscode.core.DisplayLess;
-import com.jayfeng.lesscode.full.ViewLess;
+import com.jayfeng.lesscode.core.ViewLess;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -46,6 +46,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     private FloatingActionButton fabCollect;
     private FloatingActionButton fabShare;
     private FloatingActionButton fabSave;
+    private FloatingActionButton fabQrcode;
     private BottomSheet sheet;
     private int mScrollOffset = 4;
     private List<NewsContent> list = new ArrayList<NewsContent>();
@@ -98,10 +99,13 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         fabCollect = (FloatingActionButton) findViewById(R.id.collect);
         fabShare = (FloatingActionButton) findViewById(R.id.share);
         fabSave = (FloatingActionButton) findViewById(R.id.save);
+        fabQrcode = (FloatingActionButton) findViewById(R.id.qrcode);
+
         fam.setVisibility(View.GONE);
         fabCollect.setOnClickListener(this);
         fabShare.setOnClickListener(this);
         fabSave.setOnClickListener(this);
+        fabQrcode.setOnClickListener(this);
 
     }
 
@@ -152,6 +156,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                             fabCollect.hide(true);
                             fabShare.hide(true);
                             fabSave.hide(true);
+                            fabQrcode.hide(true);
                             // fam.close(true);
                         }
                         fam.hideMenuButton(true);
@@ -178,7 +183,15 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        fam.hideMenuButton(true);
         switch (v.getId()) {
+            case R.id.qrcode:
+                Intent intent=new Intent(this,QrcodeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("data", "zafu|" + newsItem.getUrl()+"|"+newsItem.getTitle());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
             case R.id.collect:
                 NewsItem t = new Select()
                         .from(NewsItem.class)
@@ -203,7 +216,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 Toast.makeText(this, "保存成功，文件位于/sdcard/zafu_news/" + newsItem.getTitle() + ".png", Toast.LENGTH_SHORT).show();
                 break;
         }
-        fam.hideMenuButton(true);
+
     }
 
     private BottomSheet.Builder getShareActions(BottomSheet.Builder builder, String text) {

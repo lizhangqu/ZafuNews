@@ -1,0 +1,181 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@android:color/white"
+    >
+    <RelativeLayout
+        android:id="@+id/bg"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:background="@mipmap/background_sliding_menu_account_info"
+        >
+
+       <TextView
+           android:id="@+id/temperate"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="80sp"
+           android:textColor="@android:color/white"
+           android:text="29"
+           />
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/temperate"
+            android:textSize="40sp"
+            android:textColor="@android:color/white"
+            android:text="℃"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/temperate"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:text="2015.05.24 星期日"
+            />
+
+        <ImageView
+            android:id="@+id/pic"
+            android:layout_alignParentRight="true"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@mipmap/ic_action_sun"
+            />
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@id/pic"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:text="多云 微风"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_below="@id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/collect"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_action_bookmark"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="我的收藏"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/font_color_news_title"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/clear"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_action_delete"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="清除缓存"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/font_color_news_title"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_action_update"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="检查更新"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/font_color_news_title"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_action_info"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="关于我们"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/font_color_news_title"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+

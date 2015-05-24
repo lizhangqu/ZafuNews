@@ -1,5 +1,6 @@
 package cn.edu.zafu.news.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,19 +9,27 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.adapter.NewsPagerAdapter;
+import cn.edu.zafu.news.fragment.MenuFragment;
+import cn.edu.zafu.news.model.NewsItem;
 import cn.edu.zafu.news.view.PagerSlidingTabStrip;
+import cn.edu.zafu.news.zxing.android.CaptureActivity;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
     private DrawerLayout mDrawerLayout;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
+    private MenuFragment menuFragment;
     private ViewPager mViewPager;
+    private static final int REQUEST_CODE_SCAN = 0x0000;
+    private static final String DECODED_CONTENT_KEY = "codedContent";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +42,7 @@ public class MainActivity extends BaseActivity {
     private void initViewPager() {
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tab);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new NewsPagerAdapter(this,getSupportFragmentManager()));
+        mViewPager.setAdapter(new NewsPagerAdapter(this, getSupportFragmentManager()));
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         initTabsValue();
     }
@@ -80,6 +89,15 @@ public class MainActivity extends BaseActivity {
         };
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        menuFragment= (MenuFragment) getSupportFragmentManager().findFragmentById(R.id.menu_fragment);
+        menuFragment.setOnMenuClickListner(new MenuFragment.OnMenuClickListner() {
+            @Override
+            public void closeMenu() {
+                if(mDrawerLayout.isDrawerOpen(Gravity.START)){
+                    mDrawerLayout.closeDrawer(Gravity.START);
+                }
+            }
+        });
     }
 
 
@@ -99,7 +117,40 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
+        if(id==R.id.action_search){
+            Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+            startActivity(intent);
+        }else if(id==R.id.action_qrcode){
+            Intent intent = new Intent(MainActivity.this,
+                    CaptureActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SCAN);
+        }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 扫描二维码/条码回传
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
+            if (data != null) {
+                String content = data.getStringExtra(DECODED_CONTENT_KEY);
+                if(content.startsWith("zafu")){
+                    String[] temp=content.split("\\|");
+                    Intent intent = new Intent(this, ContentActivity.class);
+                    Bundle bundle = new Bundle();
+                    NewsItem item=new NewsItem();
+                    item.setUrl(temp[1]);
+                    item.setTitle(temp[2]);
+                    bundle.putSerializable("news_item", item);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this,"非法二维码，请使用新闻网客户端生成的二维码！",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }
+    }
+
 }

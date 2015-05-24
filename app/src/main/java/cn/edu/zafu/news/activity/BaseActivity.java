@@ -26,7 +26,7 @@ public class BaseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (showNavigationIcon()) {
-            toolbar.setNavigationIcon(R.mipmap.toolbar_back);
+            toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -61,7 +61,5 @@ public class BaseActivity extends AppCompatActivity {
         return super.onMenuOpened(featureId, menu);
     }
 
-    public  <T extends View> T $(int viewId) {
-        return (T) findViewById(viewId);
-    }
+
 }

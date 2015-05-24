@@ -76,5 +76,16 @@
             fab:fab_colorPressed="@color/colorPrimaryDark"
             fab:fab_colorRipple="@color/font_color_news_abstract"
             />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/qrcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_action_barcode_2"
+            fab:fab_size="mini"
+            fab:fab_label="生成二维码"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_colorRipple="@color/font_color_news_abstract"
+            />
     </com.github.clans.fab.FloatingActionMenu>
 </RelativeLayout>

@@ -48,7 +48,6 @@ import cn.edu.zafu.news.activity.ContentActivity;
 import cn.edu.zafu.news.adapter.NewsRecyclerViewAdapter;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.NewsParser;
-import cn.edu.zafu.news.common.screen.ScreenShot;
 import cn.edu.zafu.news.model.Category;
 import cn.edu.zafu.news.model.NewsItem;
 import cn.edu.zafu.news.view.DividerItemDecoration;
@@ -170,6 +169,7 @@ public class BaseFragment extends Fragment {
     private synchronized void loadMore() {
         isLoadingMore = true;
         if (page >= max) {
+            Toast.makeText(getActivity(),"没有更多新闻了！",Toast.LENGTH_LONG).show();
             return;
         }
         page++;
@@ -247,7 +247,7 @@ public class BaseFragment extends Fragment {
             }
         });
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh_layout_progress_1, R.color.swipe_refresh_layout_progress_2, R.color.swipe_refresh_layout_progress_3, R.color.swipe_refresh_layout_progress_4, R.color.swipe_refresh_layout_progress_5, R.color.swipe_refresh_layout_progress_6);
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh_layout_progress_1, R.color.swipe_refresh_layout_progress_2, R.color.swipe_refresh_layout_progress_3, R.color.swipe_refresh_layout_progress_4);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

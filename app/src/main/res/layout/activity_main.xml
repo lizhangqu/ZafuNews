@@ -36,11 +36,17 @@
                 ></android.support.v4.view.ViewPager>
         </LinearLayout>
         <!--侧滑菜单左-->
-        <LinearLayout
+        <fragment
+            android:id="@+id/menu_fragment"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/background_menu"></LinearLayout>
+            android:name="cn.edu.zafu.news.fragment.MenuFragment"
+
+            android:background="@color/background_menu"
+            tools:layout="@layout/fragment_menu">
+
+        </fragment>
     </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>

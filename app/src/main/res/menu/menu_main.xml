@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
+        android:id="@+id/action_qrcode"
+        android:icon="@mipmap/ic_action_qrcode"
+        android:orderInCategory="80"
+        android:title="扫一扫"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_search"
         android:icon="@mipmap/menu_search"
         android:orderInCategory="90"
