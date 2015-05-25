@@ -71,9 +71,17 @@
             android:label="@string/title_activity_qrcode" >
         </activity>
         <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/title_activity_about"></activity>
+        <activity
+            android:name=".activity.CollectActivity"
+            android:label="@string/title_activity_collect"></activity>
+        <activity
             android:name="cn.edu.zafu.news.zxing.android.CaptureActivity"
             android:screenOrientation="portrait">
         </activity>
+
+        <service android:name="com.jayfeng.lesscode.core.UpdateService" />
     </application>
 
 </manifest>

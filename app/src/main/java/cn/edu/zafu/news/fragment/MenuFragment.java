@@ -16,23 +16,62 @@
 
 package cn.edu.zafu.news.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.activeandroid.query.Delete;
+import com.jayfeng.lesscode.core.ToastLess;
+import com.jayfeng.lesscode.core.UpdateLess;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+
 import cn.edu.zafu.news.R;
+import cn.edu.zafu.news.activity.AboutActivity;
+import cn.edu.zafu.news.activity.CollectActivity;
+import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
+import cn.edu.zafu.news.common.parser.impl.UpdateParser;
+import cn.edu.zafu.news.model.History;
+import cn.edu.zafu.news.model.NewsItem;
+import cn.edu.zafu.news.model.Update;
 
 public class MenuFragment extends Fragment implements View.OnClickListener{
     private View view;
     private LinearLayout mCollect,mClear,mUpdate,mAbout;
+    private final static int UPDATE = 0x0001;
     public static MenuFragment newInstance() {
         MenuFragment f = new MenuFragment();
         return f;
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPDATE:
+                    Update update = (Update) msg.obj;
+                    boolean result = UpdateLess.$check(getActivity(), update);
+                    if (!result) {
+                        ToastLess.$(getActivity(), "您的版本已经是最新版");
+                    }
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
     public interface OnMenuClickListner{
         void closeMenu();
     }
@@ -68,16 +107,17 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.collect:
-                Toast.makeText(getActivity(),"collect",Toast.LENGTH_LONG).show();
+                collect();
                 break;
             case R.id.update:
-                Toast.makeText(getActivity(),"update",Toast.LENGTH_LONG).show();
+                update();
                 break;
             case R.id.clear:
-                Toast.makeText(getActivity(),"clear",Toast.LENGTH_LONG).show();
+                clear();
+
                 break;
             case R.id.about:
-                Toast.makeText(getActivity(),"about",Toast.LENGTH_LONG).show();
+                about();
                 break;
             default:
                 break;
@@ -85,5 +125,66 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         if(listener!=null){
             listener.closeMenu();
         }
+    }
+
+    private void collect() {
+        mAbout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getActivity(), CollectActivity.class);
+                startActivity(intent);
+            }
+        }, 50);
+    }
+
+    private void clear() {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("提示")
+                .setMessage("您确定要清空缓存？")
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Delete().from(History.class).execute();
+                        new Delete().from(NewsItem.class).execute();
+
+                        Toast.makeText(getActivity(), "清除成功！", Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+    }
+
+    private void about() {
+        mAbout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+            }
+        }, 50);
+
+    }
+
+    private void update() {
+
+        OkHttpClient client = NewsOkHttpClient.getInstance();
+        final Request request = new Request.Builder()
+                .url("http://fir.im/api/v2/app/version/5561c6c166bca9fe39001c75")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                UpdateParser updateParser = new UpdateParser();
+                Update update = updateParser.convert(response.body().string());
+                Message message = handler.obtainMessage();
+                message.what = UPDATE;
+                message.obj = update;
+                handler.sendMessage(message);
+            }
+        });
     }
 }

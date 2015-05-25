@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
+import com.jayfeng.lesscode.core.KeyBoardLess;
 
 import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.fragment.HistoryFragment;
@@ -57,15 +58,14 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void initView() {
-
         search = (EditText) findViewById(R.id.search_content);
         clear = (ImageView) findViewById(R.id.clear_content);
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH || (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-
                     search(search.getText().toString());
+                    KeyBoardLess.$hide(SearchActivity.this, search);
                     return true;
                 }
                 return false;

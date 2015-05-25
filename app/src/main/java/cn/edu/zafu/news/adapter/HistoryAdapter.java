@@ -24,6 +24,8 @@ public class HistoryAdapter extends
     public interface OnItemClickLitener
     {
         void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
     }
     private OnItemClickLitener mOnItemClickLitener;
 
@@ -59,6 +61,14 @@ public class HistoryAdapter extends
                 public void onClick(View v) {
                     int pos = viewHolder.getLayoutPosition();
                     mOnItemClickLitener.onItemClick(viewHolder.itemView, pos);
+                }
+            });
+            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = viewHolder.getLayoutPosition();
+                    mOnItemClickLitener.onItemLongClick(viewHolder.itemView, pos);
+                    return false;
                 }
             });
         }

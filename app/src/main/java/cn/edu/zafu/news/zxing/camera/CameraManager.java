@@ -178,7 +178,7 @@ public final class CameraManager {
 
 	/**
 	 * Convenience method for
-	 * {@link cn.edu.zafu.library.android.android.CaptureActivity}
+	 * {@link cn.edu.zafu.news.zxing.android.CaptureActivity}
 	 * 
 	 * @param newSetting
 	 *            if {@code true}, light should be turned on if currently off.

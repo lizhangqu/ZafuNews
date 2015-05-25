@@ -3,9 +3,12 @@ package cn.edu.zafu.news.zxing.encode;
 import android.graphics.Bitmap;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
+import java.util.Hashtable;
 
 public class CodeCreator {
 
@@ -21,10 +24,11 @@ public class CodeCreator {
 		if (url == null || url.equals("")) {
 			return null;
 		}
-
+		Hashtable hints = new Hashtable();
+		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 		// 生成二维矩阵,编码时指定大小,不要生成了图片以后再进行缩放,这样会模糊导致识别失败
 		BitMatrix matrix = new MultiFormatWriter().encode(url,
-				BarcodeFormat.QR_CODE, w, h);
+				BarcodeFormat.QR_CODE, w, h, hints);
 
 		int width = matrix.getWidth();
 		int height = matrix.getHeight();
@@ -36,7 +40,7 @@ public class CodeCreator {
 			for (int x = 0; x < width; x++) {
 				if (matrix.get(x, y)) {
 					//pixels[y * width + x] = 0xff000000;
-					pixels[y * width + x] = 0xff448aff;
+					pixels[y * width + x] = 0xff2a64ca;
 				}
 
 			}

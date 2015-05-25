@@ -182,40 +182,47 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
-    public void onClick(View v) {
-        fam.hideMenuButton(true);
-        switch (v.getId()) {
-            case R.id.qrcode:
-                Intent intent=new Intent(this,QrcodeActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("data", "zafu|" + newsItem.getUrl()+"|"+newsItem.getTitle());
-                intent.putExtras(bundle);
-                startActivity(intent);
-                break;
-            case R.id.collect:
-                NewsItem t = new Select()
-                        .from(NewsItem.class)
-                        .where("author = ? and time = ? and title = ? and url = ?", newsItem.getAuthor(), newsItem.getTime(), newsItem.getTitle(), newsItem.getUrl())
-                        .executeSingle();
-                if (t == null) {
-                    newsItem.save();
-                    Toast.makeText(this, "收藏成功!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "您已收藏过该篇文章，无需重复收藏！", Toast.LENGTH_SHORT).show();
+    public void onClick(final View v) {
+        fam.close(true);
+        // fam.hideMenuButton(true);
+        v.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (v.getId()) {
+                    case R.id.qrcode:
+                        Intent intent = new Intent(ContentActivity.this, QrcodeActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("data", "zafu|" + newsItem.getUrl() + "|" + newsItem.getTitle());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        break;
+                    case R.id.collect:
+                        NewsItem t = new Select()
+                                .from(NewsItem.class)
+                                .where("title = ? and url = ?", newsItem.getTitle(), newsItem.getUrl())
+                                .executeSingle();
+                        if (t == null) {
+                            newsItem.save();
+                            Toast.makeText(ContentActivity.this, "收藏成功!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ContentActivity.this, "您已收藏过该篇文章，无需重复收藏！", Toast.LENGTH_SHORT).show();
+                        }
+
+                        break;
+                    case R.id.share:
+                        sheet = getShareActions(new BottomSheet.Builder(ContentActivity.this).grid().title("分享"), newsItem.getTitle() + ":" + newsItem.getUrl()).build();
+                        sheet.show();
+                        break;
+                    case R.id.save:
+                        Toast.makeText(ContentActivity.this, "正在保存，请稍后...", Toast.LENGTH_SHORT).show();
+                        ScreenShot.savePic(ScreenShot.getRecyclerViewScreenshot(mRecyclerView, list), newsItem.getTitle() + ".png");
+                        Toast.makeText(ContentActivity.this, "保存成功，文件位于/sdcard/zafu_news/" + newsItem.getTitle() + ".png", Toast.LENGTH_SHORT).show();
+                        break;
                 }
+            }
+        }, 200);
 
 
-                break;
-            case R.id.share:
-                sheet = getShareActions(new BottomSheet.Builder(this).grid().title("分享"), newsItem.getTitle() + ":" + newsItem.getUrl()).build();
-                sheet.show();
-                break;
-            case R.id.save:
-                Toast.makeText(this, "正在保存，请稍后...", Toast.LENGTH_SHORT).show();
-                ScreenShot.savePic(ScreenShot.getRecyclerViewScreenshot(mRecyclerView, list), newsItem.getTitle() + ".png");
-                Toast.makeText(this, "保存成功，文件位于/sdcard/zafu_news/" + newsItem.getTitle() + ".png", Toast.LENGTH_SHORT).show();
-                break;
-        }
 
     }
 

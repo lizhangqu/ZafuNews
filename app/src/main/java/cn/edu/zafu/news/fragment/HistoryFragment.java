@@ -16,14 +16,17 @@
 
 package cn.edu.zafu.news.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -81,6 +84,24 @@ public class HistoryFragment extends Fragment {
                     history.search(list.get(position).getTitle());
                 }
 
+            }
+
+            @Override
+            public void onItemLongClick(View view, final int position) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("提示")
+                        .setMessage("您确定要删除该条搜索记录吗？")
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                History item = list.get(position);
+                                list.remove(item);
+                                item.delete();
+                                adapter.notifyItemRemoved(position);
+                                Toast.makeText(getActivity(), "删除搜索记录成功！", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
             }
         });
     }

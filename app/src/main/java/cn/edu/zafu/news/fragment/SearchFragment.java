@@ -16,6 +16,7 @@
 
 package cn.edu.zafu.news.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -45,9 +46,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.zafu.news.R;
+import cn.edu.zafu.news.activity.ContentActivity;
 import cn.edu.zafu.news.adapter.SearchAdapter;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.SearchParser;
+import cn.edu.zafu.news.model.NewsItem;
 import cn.edu.zafu.news.model.SearchItem;
 import cn.edu.zafu.news.view.DividerItemDecoration;
 
@@ -134,7 +137,17 @@ public class SearchFragment extends Fragment {
         adapter.setOnItemClickLitener(new SearchAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(getActivity(), ContentActivity.class);
+                Bundle bundle = new Bundle();
+                NewsItem item = new NewsItem();
+                item.setAuthor("");
+                item.setClick(list.get(position).getCategory());
+                item.setTime(list.get(position).getTime());
+                item.setUrl(list.get(position).getUrl());
+                item.setTitle(list.get(position).getTitle());
+                bundle.putSerializable("news_item", item);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });

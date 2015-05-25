@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,10 +17,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jayfeng.lesscode.core.UpdateLess;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+
 import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.adapter.NewsPagerAdapter;
+import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
+import cn.edu.zafu.news.common.parser.impl.UpdateParser;
 import cn.edu.zafu.news.fragment.MenuFragment;
 import cn.edu.zafu.news.model.NewsItem;
+import cn.edu.zafu.news.model.Update;
 import cn.edu.zafu.news.view.PagerSlidingTabStrip;
 import cn.edu.zafu.news.zxing.android.CaptureActivity;
 
@@ -30,6 +43,19 @@ public class MainActivity extends BaseActivity{
     private ViewPager mViewPager;
     private static final int REQUEST_CODE_SCAN = 0x0000;
     private static final String DECODED_CONTENT_KEY = "codedContent";
+    private final static int UPDATE = 0x0001;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPDATE:
+                    Update update = (Update) msg.obj;
+                    boolean result = UpdateLess.$check(MainActivity.this, update);
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +63,7 @@ public class MainActivity extends BaseActivity{
         showToolbar(null);
         initDrawLayout();
         initViewPager();
+        requestUpdateData();
     }
 
     private void initViewPager() {
@@ -153,4 +180,26 @@ public class MainActivity extends BaseActivity{
         }
     }
 
+    public void requestUpdateData() {
+        OkHttpClient client = NewsOkHttpClient.getInstance();
+        final Request request = new Request.Builder()
+                .url("http://fir.im/api/v2/app/version/5561c6c166bca9fe39001c75")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                UpdateParser updateParser = new UpdateParser();
+                Update update = updateParser.convert(response.body().string());
+                Message message = handler.obtainMessage();
+                message.what = UPDATE;
+                message.obj = update;
+                handler.sendMessage(message);
+            }
+        });
+    }
 }
