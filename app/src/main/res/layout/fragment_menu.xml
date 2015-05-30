@@ -24,6 +24,7 @@
            android:textColor="@android:color/white"
            android:text="29"
            />
+
         <TextView
             android:id="@+id/unit"
             android:layout_width="wrap_content"
@@ -33,7 +34,19 @@
             android:textColor="@android:color/white"
             android:text="℃"
             />
-
+        <TextView
+            android:id="@+id/min_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:text="25℃/30℃"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/temperate"
+            android:layout_below="@id/unit"
+            android:layout_alignBottom="@id/temperate"
+            />
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
@@ -43,7 +56,17 @@
             android:textColor="@android:color/white"
             android:text="2015.05.24 星期日"
             />
-
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/temperate"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:text="临安"
+            />
         <ImageView
             android:id="@+id/pic"
             android:layout_alignParentRight="true"
