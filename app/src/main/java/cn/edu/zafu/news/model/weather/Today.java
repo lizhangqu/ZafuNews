@@ -10,8 +10,8 @@ public class Today implements Serializable{
     private String date;
     private int humidityMax;
     private int humidityMin;
-    private int precipitationMax;
-    private int precipitationMin;
+    private double precipitationMax;
+    private double precipitationMin;
     private int tempMax;
     private int tempMin;
 
@@ -70,19 +70,19 @@ public class Today implements Serializable{
         this.humidityMin = humidityMin;
     }
 
-    public int getPrecipitationMax() {
+    public double getPrecipitationMax() {
         return precipitationMax;
     }
 
-    public void setPrecipitationMax(int precipitationMax) {
+    public void setPrecipitationMax(double precipitationMax) {
         this.precipitationMax = precipitationMax;
     }
 
-    public int getPrecipitationMin() {
+    public double getPrecipitationMin() {
         return precipitationMin;
     }
 
-    public void setPrecipitationMin(int precipitationMin) {
+    public void setPrecipitationMin(double precipitationMin) {
         this.precipitationMin = precipitationMin;
     }
 
