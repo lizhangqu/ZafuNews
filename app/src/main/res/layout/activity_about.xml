@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="组员1："
+            android:text="开发者："
             android:textColor="@color/font_color_news_title"
             android:textSize="18sp" />
 
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="李樟取"
+            android:text="区长"
             android:textColor="@color/font_color_news_title"
             android:textSize="18sp" />
     </LinearLayout>
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="组员2："
+            android:text="邮箱："
             android:textColor="@color/font_color_news_title"
             android:textSize="18sp" />
 
@@ -67,12 +67,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="毛青于"
+            android:text="513163535@qq.com"
             android:textColor="@color/font_color_news_title"
             android:textSize="18sp" />
     </LinearLayout>
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:id="@+id/three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,5 +105,5 @@
         android:layout_marginTop="30dp"
         android:text="排名不分先后"
         android:textColor="@color/font_color_news_title"
-        android:textSize="14sp" />
+        android:textSize="14sp" />-->
 </RelativeLayout>

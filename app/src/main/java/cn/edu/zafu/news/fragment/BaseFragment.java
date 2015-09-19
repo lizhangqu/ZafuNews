@@ -26,6 +26,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -70,6 +71,7 @@ public class BaseFragment extends Fragment {
     private static final int LOADMORE = 0x03;
     private static final int LOADMORE_ERROR = 0x04;
     private boolean isLoadingMore = false;
+    private boolean isRefreshing=false;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -77,11 +79,12 @@ public class BaseFragment extends Fragment {
                 case REFRESH:
                     swipeRefreshLayout.setRefreshing(false);
                     mAdapter.notifyDataSetChanged();
-
+                    isRefreshing=false;
                     break;
                 case REFRESH_ERROR:
 
                     swipeRefreshLayout.setRefreshing(false);
+                    isRefreshing=false;
                     Toast.makeText(getActivity(), "网络异常！", Toast.LENGTH_LONG).show();
 
 
@@ -140,6 +143,7 @@ public class BaseFragment extends Fragment {
     }
 
     private void refreshData() {
+        isRefreshing=true;
         page = 1;
         OkHttpClient client = NewsOkHttpClient.getInstance();
         final Request request = new Request.Builder()
@@ -202,8 +206,19 @@ public class BaseFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (isRefreshing) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         //初始化适配器并绑定适配器
         mAdapter = new NewsRecyclerViewAdapter(list);
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
