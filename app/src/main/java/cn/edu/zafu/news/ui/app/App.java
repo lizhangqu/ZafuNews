@@ -1,5 +1,7 @@
 package cn.edu.zafu.news.ui.app;
 
+import android.app.Application;
+
 import cn.edu.zafu.corepage.core.CoreConfig;
 
 /**
@@ -8,10 +10,12 @@ import cn.edu.zafu.corepage.core.CoreConfig;
  * Time: 11:00
  * FIXME
  */
-public class App extends com.activeandroid.app.Application{
+public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
         CoreConfig.init(this);
     }
+
+
 }

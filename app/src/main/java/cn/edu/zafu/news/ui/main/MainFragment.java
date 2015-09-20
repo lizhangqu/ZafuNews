@@ -24,13 +24,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.query.Delete;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,8 +39,10 @@ import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.UpdateParser;
 import cn.edu.zafu.news.common.parser.impl.WeatherParser;
-import cn.edu.zafu.news.model.History;
-import cn.edu.zafu.news.model.NewsItem;
+import cn.edu.zafu.news.db.dao.BaseDao;
+import cn.edu.zafu.news.db.helper.DatabaseHelper;
+import cn.edu.zafu.news.db.model.History;
+import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.model.Update;
 import cn.edu.zafu.news.model.weather.Weather;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
@@ -279,8 +281,15 @@ public class MainFragment extends ToolbarFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        new Delete().from(History.class).execute();
-                        new Delete().from(NewsItem.class).execute();
+
+                        BaseDao<History, Integer> historyDao = DatabaseHelper.getHistoryDao(getActivity());
+                        BaseDao<NewsItem, Integer> newsItemDao = DatabaseHelper.getNewsItemDao(getActivity());
+                        try {
+                            historyDao.deleteAll();
+                            newsItemDao.deleteAll();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
 
                         Toast.makeText(getActivity(), "清除成功！", Toast.LENGTH_SHORT).show();
                     }

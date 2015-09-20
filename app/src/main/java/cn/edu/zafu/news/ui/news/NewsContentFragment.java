@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
+
 import com.cocosw.bottomsheet.BottomSheet;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -29,13 +29,16 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
+import cn.edu.zafu.news.db.dao.BaseDao;
+import cn.edu.zafu.news.db.helper.DatabaseHelper;
 import cn.edu.zafu.news.model.NewsContent;
-import cn.edu.zafu.news.model.NewsItem;
+import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.ContentParser;
 import cn.edu.zafu.news.common.screen.ScreenShot;
@@ -219,16 +222,21 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
 
                         break;
                     case R.id.collect:
-                        NewsItem t = new Select()
-                                .from(NewsItem.class)
-                                .where("title = ? and url = ?", newsItem.getTitle(), newsItem.getUrl())
-                                .executeSingle();
-                        if (t == null) {
-                            newsItem.save();
-                            Toast.makeText(getActivity(), "收藏成功!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "您已收藏过该篇文章，无需重复收藏！", Toast.LENGTH_SHORT).show();
+                        BaseDao<NewsItem, Integer> newsItemDao = DatabaseHelper.getNewsItemDao(getActivity());
+                        try {
+                            List<NewsItem> query = newsItemDao.query(new String[]{"title", "url"}, new Object[]{newsItem.getTitle(), newsItem.getUrl()});
+                            if (query == null||query.size()==0) {
+                                newsItemDao.save(newsItem);
+                                Toast.makeText(getActivity(), "收藏成功!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "您已收藏过该篇文章，无需重复收藏！", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
+
+
 
                         break;
                     case R.id.share:

@@ -46,13 +46,15 @@ import cn.edu.zafu.corepage.base.BaseFragment;
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.model.Category;
-import cn.edu.zafu.news.model.NewsItem;
+import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.NewsParser;
 import cn.edu.zafu.news.ui.main.adapter.NewsAdapter;
 import cn.edu.zafu.news.widget.DividerItemDecoration;
 
 public class NewsFragment extends BaseFragment {
+    private static final String PAGE_NAME="news";
+
     private View view;
     private RecyclerView mRecyclerView;
     private NewsAdapter mAdapter;
@@ -273,4 +275,8 @@ public class NewsFragment extends BaseFragment {
     }
 
 
+    @Override
+    public String getPageName() {
+        return PAGE_NAME;
+    }
 }

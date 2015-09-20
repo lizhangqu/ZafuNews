@@ -45,7 +45,7 @@ import java.util.List;
 
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.model.NewsItem;
+import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.model.SearchItem;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.SearchParser;

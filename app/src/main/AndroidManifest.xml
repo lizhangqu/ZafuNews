@@ -52,12 +52,6 @@
         <meta-data android:value="zafu" android:name="UMENG_CHANNEL"/>
         <!--友盟-->
 
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="zafu_news.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
         <activity android:name=".ui.main.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

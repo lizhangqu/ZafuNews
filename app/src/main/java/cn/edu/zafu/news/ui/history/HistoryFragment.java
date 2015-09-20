@@ -28,13 +28,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.model.History;
+import cn.edu.zafu.news.db.dao.BaseDao;
+import cn.edu.zafu.news.db.helper.DatabaseHelper;
+import cn.edu.zafu.news.db.model.History;
 import cn.edu.zafu.news.ui.history.adapter.HistoryAdapter;
 import cn.edu.zafu.news.widget.DividerItemDecoration;
 
@@ -63,9 +64,15 @@ public class HistoryFragment extends Fragment {
 
     private void initData() {
         list=new ArrayList<History>();
-        List<History> histories = new Select()
-                .from(History.class).execute();
-        list.addAll(histories);
+
+        BaseDao<History, Integer> historyDao = DatabaseHelper.getHistoryDao(getActivity());
+        try {
+            List<History> items =   historyDao.queryAll();
+            list.addAll(items);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void initRecyclerView(View view) {
@@ -97,7 +104,13 @@ public class HistoryFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 History item = list.get(position);
                                 list.remove(item);
-                                item.delete();
+
+                                BaseDao<History, Integer> historyDao = DatabaseHelper.getHistoryDao(getActivity());
+                                try {
+                                    historyDao.delete(item);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
                                 adapter.notifyItemRemoved(position);
                                 Toast.makeText(getActivity(), "删除搜索记录成功！", Toast.LENGTH_SHORT).show();
                             }

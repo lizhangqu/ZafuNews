@@ -4,6 +4,7 @@ package cn.edu.zafu.news.db.dao;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedDelete;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.PreparedUpdate;
@@ -127,6 +128,26 @@ public abstract class BaseDao<T, Integer> {
         return 0;
     }
 
+
+
+    public int deleteAll() throws SQLException {
+        Dao<T, Integer> dao = getDao();
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = dao.startThreadConnection();
+            dao.setAutoCommit(databaseConnection, false);
+            DeleteBuilder<T, Integer> tIntegerDeleteBuilder = dao.deleteBuilder();
+            int delete = dao.delete(tIntegerDeleteBuilder.prepare());
+            dao.commit(databaseConnection);
+            return delete;
+        } catch (SQLException e) {
+            dao.rollBack(databaseConnection);
+            e.printStackTrace();
+        } finally {
+            dao.endThreadConnection(databaseConnection);
+        }
+        return 0;
+    }
     /**
      * 删，带事务操作
      *

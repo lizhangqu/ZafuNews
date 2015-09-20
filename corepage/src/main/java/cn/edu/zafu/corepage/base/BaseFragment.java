@@ -403,10 +403,12 @@ public class BaseFragment extends Fragment {
     }
     public void onResume() {
         super.onResume();
+        Log.e("TAG","pageName:"+getPageName());
         MobclickAgent.onPageStart(getPageName()); //统计页面
     }
     public void onPause() {
         super.onPause();
+        Log.e("TAG", "pageName:" + getPageName());
         MobclickAgent.onPageEnd(getPageName());
     }
 

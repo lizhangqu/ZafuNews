@@ -19,10 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
+
+import java.sql.SQLException;
+import java.util.List;
 
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.model.History;
+import cn.edu.zafu.news.db.dao.BaseDao;
+import cn.edu.zafu.news.db.helper.DatabaseHelper;
+import cn.edu.zafu.news.db.model.History;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
 import cn.edu.zafu.news.ui.history.HistoryFragment;
 
@@ -135,12 +139,16 @@ public class SearchFragment extends ToolbarFragment {
             return;
         }
         History history = new History(content);
-        History t = new Select()
-                .from(History.class)
-                .where("title = ?", history.getTitle())
-                .executeSingle();
-        if (t == null) {
-            history.save();
+        BaseDao<History, Integer> historyDao = DatabaseHelper.getHistoryDao(getActivity());
+
+        try {
+            List<History> title = historyDao.query("title", history.getTitle());
+            if (title == null||title.size()==0) {
+                historyDao.save(history);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
         }
 
         transaction = fragmentManager.beginTransaction();

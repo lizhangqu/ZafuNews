@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.model.History;
+import cn.edu.zafu.news.db.model.History;
 
 /**
  * Created by lizhangqu on 2015/5/15.
