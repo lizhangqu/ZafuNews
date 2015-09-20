@@ -1,0 +1,32 @@
+[
+  {
+    "name": "main",
+    "class": "cn.edu.zafu.news.ui.main.MainFragment",
+    "params": ""
+  },
+  {
+    "name": "newscontent",
+    "class": "cn.edu.zafu.news.ui.news.NewsContentFragment",
+    "params": ""
+  },
+  {
+    "name": "about",
+    "class": "cn.edu.zafu.news.ui.about.AboutFragment",
+    "params": ""
+  },
+  {
+    "name": "collect",
+    "class": "cn.edu.zafu.news.ui.collect.CollectFragment",
+    "params": ""
+  },
+  {
+    "name": "qrcode",
+    "class": "cn.edu.zafu.news.ui.qrcode.QrcodeFragment",
+    "params": ""
+  },
+  {
+    "name": "search",
+    "class": "cn.edu.zafu.news.ui.search.SearchFragment",
+    "params": ""
+  }
+]

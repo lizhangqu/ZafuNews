@@ -1,13 +1,12 @@
 package cn.edu.zafu.news.common.screen;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.jayfeng.lesscode.core.DisplayLess;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,6 +21,18 @@ import cn.edu.zafu.news.model.NewsContent;
  */
 public class ScreenShot {
     private static final String TAG = "ScreenShot";
+
+    /**
+     * 将dip的值转化为px值
+     *
+     * @param context  上下文
+     * @param dipValue dip的值
+     * @return px的值
+     */
+    public static int dip2px(Context context, float dipValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
 
     public static Bitmap getRecyclerViewScreenshot(RecyclerView view, List<NewsContent> list) {
         int size = view.getAdapter().getItemCount();
@@ -38,7 +49,7 @@ public class ScreenShot {
             holder.itemView.layout(0, 0, holder.itemView.getMeasuredWidth(), holder.itemView.getMeasuredHeight());
             width=view.getMeasuredWidth();
             if( newsContent.getType()==NewsContent.TYPE_IMAGE){
-                height=height+ DisplayLess.$dp2px(200);
+                height=height+ dip2px(view.getContext(),200);
             }else{
                 height=height+holder.itemView.getMeasuredHeight();
             }

@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!-- 标题颜色-->
-        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorPrimary">@color/font_color_news_title</item>
 
         <!-- 溢出菜单图标颜色-->
         <item name="colorControlNormal">@android:color/white</item>

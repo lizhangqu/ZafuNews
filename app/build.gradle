@@ -2,12 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        /*release {
-            storeFile file('D:/Program Files/Android Studio/lizhangqu.keystore')
-            keyAlias 'lizhangqu'
-            keyPassword 'lizhangqu'
-            storePassword 'lizhangqu'
-        }*/
         release {
             keyAlias 'lizhangqu'
             keyPassword 'lizhangqu'
@@ -16,15 +10,21 @@ android {
         }
     }
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "cn.edu.zafu.news"
+        applicationId "cn.edu.zafu.newsnew"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 4
         versionName "1.0 beta"
     }
     buildTypes {
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            /* signingConfig signingConfigs.release*/
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -36,16 +36,22 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.1.0'
-    compile 'com.android.support:recyclerview-v7:22.1.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
-    compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'org.jsoup:jsoup:1.8.2'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.5-RELEASE'
     compile 'com.github.clans:fab:1.5.0'
     compile 'com.cocosw:bottomsheet:1.+@aar'
+    compile project(':corepage')
+    compile project(':update')
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"

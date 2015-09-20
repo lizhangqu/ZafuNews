@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -18,13 +21,13 @@ import android.widget.TextView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.activity.BaseActivity;
 import cn.edu.zafu.news.zxing.camera.CameraManager;
 import cn.edu.zafu.news.zxing.view.ViewfinderView;
 
@@ -32,9 +35,9 @@ import cn.edu.zafu.news.zxing.view.ViewfinderView;
  * 这个activity打开相机，在后台线程做常规的扫描；它绘制了一个结果view来帮助正确地显示条形码，在扫描的时候显示反馈信息，
  * 然后在扫描成功的时候覆盖扫描结果
  */
-public final class CaptureActivity extends BaseActivity implements
+public final class CaptureActivity extends AppCompatActivity implements
         SurfaceHolder.Callback {
-
+    protected Toolbar toolbar;
     private static final String TAG = CaptureActivity.class.getSimpleName();
 
     // 相机控制
@@ -250,5 +253,31 @@ public final class CaptureActivity extends BaseActivity implements
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected boolean showNavigationIcon() {
+        return true;
+    }
+    protected void showToolbar(String title) {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (title != null) {
+            toolbar.setTitle(title);
+        }
+
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.showOverflowMenu();
+        setSupportActionBar(toolbar);
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintResource(R.color.colorPrimary);
+        tintManager.setStatusBarTintEnabled(true);
+        if (showNavigationIcon()) {
+            toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/bg"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:background="@mipmap/background_sliding_menu_account_info"
+    android:paddingLeft="15dp"
+    android:paddingRight="10dp"
+    android:paddingTop="30dp"
+
+    >
+
+    <TextView
+        android:id="@+id/temperate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="29"
+        android:textColor="@android:color/white"
+        android:textSize="80sp"
+        />
+
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/temperate"
+        android:text="℃"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        />
+
+    <TextView
+        android:id="@+id/min_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/temperate"
+        android:layout_below="@id/unit"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/temperate"
+        android:text="25℃/30℃"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/temperate"
+        android:text="2015.05.24 星期日"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/temperate"
+        android:layout_marginRight="25dp"
+        android:text="临安"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:scaleType="center"
+        android:src="@mipmap/ic_action_sun"
+        />
+
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/pic"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="多云 微风"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        />
+</RelativeLayout>
