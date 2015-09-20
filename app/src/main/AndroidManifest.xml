@@ -49,7 +49,7 @@
 
         <!--友盟-->
         <meta-data android:value="55f3a51867e58eb2b6001cd8" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="zafu" android:name="UMENG_CHANNEL"/>
+        <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
         <!--友盟-->
 
         <activity android:name=".ui.main.MainActivity" >

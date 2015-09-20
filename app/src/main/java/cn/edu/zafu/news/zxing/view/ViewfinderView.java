@@ -237,6 +237,7 @@ public final class ViewfinderView extends View {
 		int statusTextSize = 45;
 		int statusPaddingTop = 180;
 
+
 		paint.setColor(statusColor);
 		paint.setTextSize(statusTextSize);
 

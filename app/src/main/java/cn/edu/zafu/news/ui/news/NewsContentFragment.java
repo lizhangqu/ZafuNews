@@ -13,6 +13,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -201,7 +202,8 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
 
     private void getParams() {
         Bundle bundle = getArguments();
-        newsItem = (NewsItem) bundle.get("news_item");
+        newsItem = (NewsItem) bundle.getSerializable("news_item");
+        Log.e("TAG",newsItem+"");
     }
 
     @Override

@@ -12,28 +12,64 @@ android {
     compileSdkVersion 22
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "cn.edu.zafu.newsnew"
+        applicationId "cn.edu.zafu.news"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 4
-        versionName "1.0 beta"
+        versionCode 5
+        versionName "2.0"
     }
     buildTypes {
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            /* signingConfig signingConfigs.release*/
             signingConfig signingConfigs.release
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            /* signingConfig signingConfigs.release*/
             signingConfig signingConfigs.release
         }
     }
+    productFlavors {
+        wandoujia {}
+        baidu {}
+        anzhuo{}
+        shoujizhushou {}
+        zafu{}
+    }
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def oldFile = output.outputFile
+            def newName = '';
+            if (variant.buildType.name.equals('release')) {
+                def releaseApkName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + '-signed.apk'
+                output.outputFile = new File(oldFile.parent, releaseApkName)
+            }
+            if (variant.buildType.name.equals('beta')) {
+                newName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + "-beta" + getDate() + ".apk"
+                output.outputFile = new File(oldFile.parent, newName)
+            }
+            if (variant.buildType.name.equals('debug')) {
+                newName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + "-debug" + getDate() + ".apk"
+                output.outputFile = new File(oldFile.parent, newName)
+            }
+        }
+    }
 }
-
+//获取产品名
+def getProductName() {
+    return "zafunews"
+}
+//获取时间戳
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'

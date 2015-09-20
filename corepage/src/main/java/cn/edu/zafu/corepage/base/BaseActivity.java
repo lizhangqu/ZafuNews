@@ -411,7 +411,10 @@ public class BaseActivity extends AppCompatActivity implements CoreSwitcher {
                 frg.setFragmentFinishListener(new BaseFragment.OnFragmentFinishListener() {
                     @Override
                     public void onFragmentResult(int requestCode, int resultCode, Intent intent) {
+
                         opener.onFragmentResult(requestCode, resultCode, intent);
+
+
                     }
                 });
                 return frg;

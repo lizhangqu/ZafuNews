@@ -28,6 +28,7 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -37,30 +38,25 @@ import java.util.Date;
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
-import cn.edu.zafu.news.common.parser.impl.UpdateParser;
 import cn.edu.zafu.news.common.parser.impl.WeatherParser;
 import cn.edu.zafu.news.db.dao.BaseDao;
 import cn.edu.zafu.news.db.helper.DatabaseHelper;
 import cn.edu.zafu.news.db.model.History;
 import cn.edu.zafu.news.db.model.NewsItem;
-import cn.edu.zafu.news.model.Update;
 import cn.edu.zafu.news.model.weather.Weather;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
 import cn.edu.zafu.news.ui.main.adapter.NewsPagerAdapter;
-import cn.edu.zafu.news.zxing.android.CaptureActivity;
 
 
 public class MainFragment extends ToolbarFragment {
     private DrawerLayout mDrawerLayout;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private final static int UPDATE_START = 0x0001;
-    private final static int UPDATE_MENU= 0x0002;
-    private final static int WEATHER = 0x0003;
 
-    private static final int REQUEST_CODE_SCAN = 0x0004;
+    private final static int WEATHER = 0x0001;
 
-
+    private static final int REQUEST_CODE_SCAN = 1;
+    private static final String DECODED_CONTENT_KEY = "codedContent";
     private TextView temp;
     private TextView place;
     private TextView min2max;
@@ -68,25 +64,12 @@ public class MainFragment extends ToolbarFragment {
     private ImageView weatherIcon;
     private TextView date;
 
-    private static final String DECODED_CONTENT_KEY = "codedContent";
+
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-               /* case UPDATE_START: {
-                    Update update = (Update) msg.obj;
-                    boolean result = UpdateLess.$check(getActivity(), update);
-                    break;
-                }
-                case UPDATE_MENU: {
-                    Update update = (Update) msg.obj;
-                    boolean result = UpdateLess.$check(getActivity(), update);
-                    if (!result) {
-                        Toast.makeText(getActivity(), "您的版本已经是最新版", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                }*/
                 case WEATHER: {
                     Weather weather = (Weather) msg.obj;
                     if (weather != null) {
@@ -133,7 +116,6 @@ public class MainFragment extends ToolbarFragment {
         initDrawLayout(view);
         initNavigationView(view);
         initViewPager(view);
-        update(UPDATE_START);
         initWeather(view);
     }
 
@@ -186,7 +168,7 @@ public class MainFragment extends ToolbarFragment {
                                 openPage("collect", null, CoreAnim.slide);
                                 break;
                             case R.id.update:
-                                update(UPDATE_MENU);
+                                UmengUpdateAgent.forceUpdate(getActivity());
                                 break;
                             case R.id.clear:
                                 clear();
@@ -218,9 +200,11 @@ public class MainFragment extends ToolbarFragment {
 
             openPage("search",null,CoreAnim.slide);
         } else if (id == R.id.action_qrcode) {
-            Intent intent = new Intent(getActivity(),
+            /*Intent intent = new Intent(getActivity(),
                     CaptureActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SCAN);
+            startActivityForResult(intent, REQUEST_CODE_SCAN);*/
+
+            openPageForResult(true,"scan",null,CoreAnim.slide,REQUEST_CODE_SCAN);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -232,6 +216,7 @@ public class MainFragment extends ToolbarFragment {
         if (requestCode == REQUEST_CODE_SCAN && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
+                Log.e("TAG",content);
                 if(content.startsWith("zafu")){
                     String[] temp=content.split("\\|");
                     Bundle bundle = new Bundle();
@@ -239,39 +224,17 @@ public class MainFragment extends ToolbarFragment {
                     item.setUrl(temp[1]);
                     item.setTitle(temp[2]);
                     bundle.putSerializable("news_item", item);
-                    openPage("newcontent",bundle, CoreAnim.slide);
+                    openPage("newscontent",bundle, CoreAnim.slide,true);
                 }else{
                     Toast.makeText(getActivity(), "非法二维码，请使用新闻网客户端生成的二维码！", Toast.LENGTH_LONG).show();
                 }
 
             }
+            return ;
         }
     }
 
 
-    private void update(final int what) {
-
-        OkHttpClient client = NewsOkHttpClient.getInstance();
-        final Request request = new Request.Builder()
-                .url("http://fir.im/api/v2/app/version/5561c6c166bca9fe39001c75")
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                UpdateParser updateParser = new UpdateParser();
-                Update update = updateParser.convert(response.body().string());
-                Message message = handler.obtainMessage();
-                message.what = what;
-                message.obj = update;
-                handler.sendMessage(message);
-            }
-        });
-    }
 
     private void clear() {
         new AlertDialog.Builder(getActivity())

@@ -28,5 +28,10 @@
     "name": "search",
     "class": "cn.edu.zafu.news.ui.search.SearchFragment",
     "params": ""
+  },
+  {
+    "name": "scan",
+    "class": "cn.edu.zafu.news.zxing.android.CaptureFragment",
+    "params": ""
   }
 ]
