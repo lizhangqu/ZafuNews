@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import java.util.List;
 
 import cn.edu.zafu.news.R;
@@ -19,18 +18,15 @@ public class SearchAdapter extends
         RecyclerView.Adapter<SearchAdapter.ViewHolder>{
     //数据集
     private List<SearchItem> list;
-    public interface OnItemClickLitener
-    {
-        void onItemClick(View view, int position);
-    }
     private OnItemClickLitener mOnItemClickLitener;
+
+    public SearchAdapter(List<SearchItem> list) {
+        this.list = list;
+    }
 
     public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener)
     {
         this.mOnItemClickLitener = mOnItemClickLitener;
-    }
-    public SearchAdapter(List<SearchItem> list) {
-        this.list = list;
     }
 
     @Override
@@ -66,6 +62,10 @@ public class SearchAdapter extends
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

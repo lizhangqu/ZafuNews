@@ -31,6 +31,18 @@ public class NewsContentAdapter extends
         this.list = list;
     }
 
+    /**
+     * 将dip的值转化为px值
+     *
+     * @param context  上下文
+     * @param dipValue dip的值
+     * @return px的值
+     */
+    public static int dip2px(Context context, float dipValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
@@ -97,18 +109,6 @@ public class NewsContentAdapter extends
                 param.setText(INDENT+Html.fromHtml(list.get(position).getContent()));
                 break;
         }
-    }
-
-    /**
-     * 将dip的值转化为px值
-     *
-     * @param context  上下文
-     * @param dipValue dip的值
-     * @return px的值
-     */
-    public static int dip2px(Context context, float dipValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dipValue * scale + 0.5f);
     }
 
     @Override

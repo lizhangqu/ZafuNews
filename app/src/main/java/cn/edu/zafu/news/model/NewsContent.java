@@ -12,6 +12,14 @@ public class NewsContent{
     private int type;
     private String content;
 
+    public NewsContent() {
+    }
+
+    public NewsContent(int type, String content) {
+        this.type = type;
+        this.content = content;
+    }
+
     public int getType() {
         return type;
     }
@@ -25,13 +33,6 @@ public class NewsContent{
     }
 
     public void setContent(String content) {
-        this.content = content;
-    }
-
-    public NewsContent() {
-    }
-    public NewsContent(int type, String content) {
-        this.type = type;
         this.content = content;
     }
 

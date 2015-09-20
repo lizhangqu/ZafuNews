@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-
 import java.util.List;
 
 import cn.edu.zafu.news.R;
@@ -21,20 +19,15 @@ public class HistoryAdapter extends
         RecyclerView.Adapter<HistoryAdapter.ViewHolder>{
     //数据集
     private List<History> list;
-    public interface OnItemClickLitener
-    {
-        void onItemClick(View view, int position);
-
-        void onItemLongClick(View view, int position);
-    }
     private OnItemClickLitener mOnItemClickLitener;
+
+    public HistoryAdapter(List<History> list) {
+        this.list = list;
+    }
 
     public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener)
     {
         this.mOnItemClickLitener = mOnItemClickLitener;
-    }
-    public HistoryAdapter(List<History> list) {
-        this.list = list;
     }
 
     @Override
@@ -77,6 +70,12 @@ public class HistoryAdapter extends
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

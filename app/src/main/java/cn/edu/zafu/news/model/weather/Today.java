@@ -14,6 +14,12 @@ public class Today implements Serializable{
     private double precipitationMin;
     private int tempMax;
     private int tempMin;
+    private String weatherEnd;
+    private String weatherStart;
+    private String windDirectionEnd;
+    private String windDirectionStart;
+    private int windMax;
+    private int windMin;
 
     @Override
     public String toString() {
@@ -34,9 +40,6 @@ public class Today implements Serializable{
                 ", windMin=" + windMin +
                 '}';
     }
-
-    private String weatherEnd;
-    private String weatherStart;
 
     public String getCityCode() {
         return cityCode;
@@ -149,9 +152,4 @@ public class Today implements Serializable{
     public void setWindMin(int windMin) {
         this.windMin = windMin;
     }
-
-    private String windDirectionEnd;
-    private String windDirectionStart;
-    private int windMax;
-    private int windMin;
 }

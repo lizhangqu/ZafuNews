@@ -12,16 +12,18 @@ public class History extends Model {
     @Column(name = "title")
     private String title;
 
+    public History() {
+    }
+
+    public History(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
-    public History(){
-    }
-    public History(String title) {
         this.title = title;
     }
 

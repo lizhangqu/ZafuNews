@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import java.util.List;
 
 import cn.edu.zafu.news.R;
@@ -19,19 +18,15 @@ public class NewsAdapter extends
         RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     //数据集
     private List<NewsItem> list;
-    public interface OnItemClickLitener
-    {
-        void onItemClick(View view, int position);
-        void onItemLongClick(View view , int position);
-    }
     private OnItemClickLitener mOnItemClickLitener;
+
+    public NewsAdapter(List<NewsItem> list) {
+        this.list = list;
+    }
 
     public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener)
     {
         this.mOnItemClickLitener = mOnItemClickLitener;
-    }
-    public NewsAdapter(List<NewsItem> list) {
-        this.list = list;
     }
 
     @Override
@@ -76,6 +71,12 @@ public class NewsAdapter extends
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

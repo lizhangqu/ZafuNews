@@ -7,16 +7,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.ui.main.NewsFragment;
 import cn.edu.zafu.news.model.Category;
+import cn.edu.zafu.news.ui.main.NewsFragment;
 
 /**
  * Created by lizhangqu on 2015/5/15.
  */
 public class NewsPagerAdapter extends FragmentPagerAdapter {
+    private static SparseArray<Fragment> fragments;
     private final String[] TITLES;
     private final String[] URLS;
-    private static SparseArray<Fragment> fragments;
     public NewsPagerAdapter(Context context,FragmentManager fm) {
         super(fm);
         TITLES=context.getResources().getStringArray(R.array.category_title);

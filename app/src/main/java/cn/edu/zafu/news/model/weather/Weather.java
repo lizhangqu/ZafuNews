@@ -13,16 +13,16 @@ public class Weather implements Serializable{
         return realtime;
     }
 
+    public void setRealtime(RealTime realtime) {
+        this.realtime = realtime;
+    }
+
     @Override
     public String toString() {
         return "Weather{" +
                 "realtime=" + realtime +
                 ", today=" + today +
                 '}';
-    }
-
-    public void setRealtime(RealTime realtime) {
-        this.realtime = realtime;
     }
 
     public Today getToday() {

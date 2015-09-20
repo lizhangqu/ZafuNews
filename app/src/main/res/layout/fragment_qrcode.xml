@@ -20,12 +20,12 @@
 
         />
     <TextView
-        android:layout_below="@id/qrcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/qrcode"
         android:layout_centerHorizontal="true"
-        android:text="请将二维码提供给对方扫描"
         android:layout_marginTop="5dp"
+        android:text="请将二维码提供给对方扫描"
         android:textColor="@color/font_color_news_title"
         />
 </RelativeLayout>
