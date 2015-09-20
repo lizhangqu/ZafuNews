@@ -34,8 +34,8 @@
             android:id="@+id/progress_frame"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:gravity="center"
-            android:background="#fff">
+            android:background="#fff"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/status_msg"
