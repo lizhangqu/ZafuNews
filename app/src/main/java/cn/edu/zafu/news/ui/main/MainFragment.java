@@ -40,8 +40,8 @@ import java.util.Date;
 
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
-import cn.edu.zafu.news.common.parser.impl.WeatherParser;
+import cn.edu.zafu.news.net.NewsOkHttpClient;
+import cn.edu.zafu.news.net.parser.impl.WeatherParser;
 import cn.edu.zafu.news.db.dao.BaseDao;
 import cn.edu.zafu.news.db.helper.DatabaseHelper;
 import cn.edu.zafu.news.db.model.History;

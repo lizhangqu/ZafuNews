@@ -1,4 +1,4 @@
-package cn.edu.zafu.news.common.parser.impl;
+package cn.edu.zafu.news.net.parser.impl;
 
 import android.util.Log;
 
@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.edu.zafu.news.common.parser.Parser;
+import cn.edu.zafu.news.net.parser.Parser;
 import cn.edu.zafu.news.model.SearchItem;
 
 /**

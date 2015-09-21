@@ -47,8 +47,8 @@ import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
 import cn.edu.zafu.news.model.Category;
 import cn.edu.zafu.news.db.model.NewsItem;
-import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
-import cn.edu.zafu.news.common.parser.impl.NewsParser;
+import cn.edu.zafu.news.net.NewsOkHttpClient;
+import cn.edu.zafu.news.net.parser.impl.NewsParser;
 import cn.edu.zafu.news.ui.main.adapter.NewsAdapter;
 import cn.edu.zafu.news.widget.DividerItemDecoration;
 
