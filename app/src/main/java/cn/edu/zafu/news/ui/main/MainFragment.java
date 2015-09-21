@@ -227,6 +227,10 @@ public class MainFragment extends ToolbarFragment {
         UmengUpdateAgent.forceUpdate(getActivity());
     }
 
+
+
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);

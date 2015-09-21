@@ -1,1 +1,1 @@
-include ':app', ':corepage', ':update'
+include ':app', ':corepage', ':update', ':share'

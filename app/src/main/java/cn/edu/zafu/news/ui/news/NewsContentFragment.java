@@ -1,11 +1,5 @@
 package cn.edu.zafu.news.ui.news;
 
-import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.cocosw.bottomsheet.BottomSheet;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
@@ -35,15 +28,16 @@ import java.util.List;
 
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.net.NewsOkHttpClient;
-import cn.edu.zafu.news.net.parser.impl.ContentParser;
-import cn.edu.zafu.news.widget.screen.ScreenShot;
 import cn.edu.zafu.news.db.dao.BaseDao;
 import cn.edu.zafu.news.db.helper.DatabaseHelper;
 import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.model.NewsContent;
+import cn.edu.zafu.news.net.NewsOkHttpClient;
+import cn.edu.zafu.news.net.parser.impl.ContentParser;
+import cn.edu.zafu.news.share.ShareTool;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
 import cn.edu.zafu.news.ui.news.adapter.NewsContentAdapter;
+import cn.edu.zafu.news.widget.screen.ScreenShot;
 
 /**
  * User: lizhangqu(513163535@qq.com)
@@ -51,8 +45,9 @@ import cn.edu.zafu.news.ui.news.adapter.NewsContentAdapter;
  * Time: 21:47
  * FIXME
  */
-public class NewsContentFragment extends ToolbarFragment implements View.OnClickListener{
+public class NewsContentFragment extends ToolbarFragment implements View.OnClickListener {
     private Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +57,8 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_newscontent,container,false);
-        showToolbar(view,newsItem.getTitle());
+        View view = inflater.inflate(R.layout.fragment_newscontent, container, false);
+        showToolbar(view, newsItem.getTitle());
         loadDataFromNetwork(newsItem.getUrl());
         initFAM(view);
         initRecyclerView(view);
@@ -80,7 +75,6 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
     private FloatingActionButton fabShare;
     private FloatingActionButton fabSave;
     private FloatingActionButton fabQrcode;
-    private BottomSheet sheet;
     private int mScrollOffset = 4;
     private List<NewsContent> list = new ArrayList<NewsContent>();
     private static final int LOAD_DATA = 0x01;
@@ -111,13 +105,14 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
     };
 
     private void hideCircleProgressBar(View view) {
-        if (view!=null) {
+        if (view != null) {
             mCircleProgressBar = (CircleProgressBar) view.findViewById(R.id.progressBar);
             if (mCircleProgressBar != null) {
                 mCircleProgressBar.setVisibility(View.GONE);
             }
         }
     }
+
     private void initFAM(View view) {
         fam = (FloatingActionMenu) view.findViewById(R.id.fam);
         fabCollect = (FloatingActionButton) view.findViewById(R.id.collect);
@@ -205,6 +200,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
         Log.e("TAG", newsItem + "");
     }
 
+
     @Override
     public void onClick(final View v) {
         fam.close(true);
@@ -229,7 +225,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
                         BaseDao<NewsItem, Integer> newsItemDao = DatabaseHelper.getNewsItemDao(getActivity());
                         try {
                             List<NewsItem> query = newsItemDao.query(new String[]{"title", "url"}, new Object[]{newsItem.getTitle(), newsItem.getUrl()});
-                            if (query == null||query.size()==0) {
+                            if (query == null || query.size() == 0) {
                                 newsItemDao.save(newsItem);
                                 Toast.makeText(getActivity(), "收藏成功!", Toast.LENGTH_SHORT).show();
                             } else {
@@ -241,16 +237,9 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
                         }
 
 
-
                         break;
                     case R.id.share:
-                        v.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                sheet = getShareActions(new BottomSheet.Builder(getActivity()).grid().title("分享"), newsItem.getTitle() + ":" + newsItem.getUrl()).build();
-                                sheet.show();
-                            }
-                        }, 200);
+                        ShareTool shareTool=new ShareTool(getActivity(),newsItem.getTitle(),newsItem.getUrl());
                         break;
                     case R.id.save:
                         Toast.makeText(getActivity(), "正在保存，请稍后...", Toast.LENGTH_SHORT).show();
@@ -267,34 +256,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
         }, 200);
 
 
-
     }
 
-    private BottomSheet.Builder getShareActions(BottomSheet.Builder builder, String text) {
-        PackageManager pm = getActivity().getPackageManager();
 
-        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-        final List<ResolveInfo> list = pm.queryIntentActivities(shareIntent, 0);
-
-        for (int i = 0; i < list.size(); i++) {
-            builder.sheet(i, list.get(i).loadIcon(pm), list.get(i).loadLabel(pm));
-        }
-
-        builder.listener(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ActivityInfo activity = list.get(which).activityInfo;
-                ComponentName name = new ComponentName(activity.applicationInfo.packageName,
-                        activity.name);
-                Intent newIntent = (Intent) shareIntent.clone();
-                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                        Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-                newIntent.setComponent(name);
-                startActivity(newIntent);
-            }
-        });
-        return builder;
-    }
 }
