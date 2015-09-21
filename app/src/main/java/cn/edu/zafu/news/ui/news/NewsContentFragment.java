@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
 import com.cocosw.bottomsheet.BottomSheet;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -36,13 +35,13 @@ import java.util.List;
 
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.db.dao.BaseDao;
-import cn.edu.zafu.news.db.helper.DatabaseHelper;
-import cn.edu.zafu.news.model.NewsContent;
-import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.common.http.client.NewsOkHttpClient;
 import cn.edu.zafu.news.common.parser.impl.ContentParser;
 import cn.edu.zafu.news.common.screen.ScreenShot;
+import cn.edu.zafu.news.db.dao.BaseDao;
+import cn.edu.zafu.news.db.helper.DatabaseHelper;
+import cn.edu.zafu.news.db.model.NewsItem;
+import cn.edu.zafu.news.model.NewsContent;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
 import cn.edu.zafu.news.ui.news.adapter.NewsContentAdapter;
 
@@ -203,7 +202,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
     private void getParams() {
         Bundle bundle = getArguments();
         newsItem = (NewsItem) bundle.getSerializable("news_item");
-        Log.e("TAG",newsItem+"");
+        Log.e("TAG", newsItem + "");
     }
 
     @Override
@@ -215,12 +214,15 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
             public void run() {
                 switch (v.getId()) {
                     case R.id.qrcode:
-                       // Intent intent = new Intent(getActivity(), QrcodeActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("data", "zafu|" + newsItem.getUrl() + "|" + newsItem.getTitle());
-                      //  intent.putExtras(bundle);
-                      //  startActivity(intent);
-                        openPage("qrcode",bundle, CoreAnim.slide);
+                        v.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("data", "zafu|" + newsItem.getUrl() + "|" + newsItem.getTitle());
+                                openPage("qrcode", bundle, CoreAnim.slide);
+                            }
+                        }, 200);
+
 
                         break;
                     case R.id.collect:
@@ -242,13 +244,23 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
 
                         break;
                     case R.id.share:
-                        sheet = getShareActions(new BottomSheet.Builder(getActivity()).grid().title("分享"), newsItem.getTitle() + ":" + newsItem.getUrl()).build();
-                        sheet.show();
+                        v.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                sheet = getShareActions(new BottomSheet.Builder(getActivity()).grid().title("分享"), newsItem.getTitle() + ":" + newsItem.getUrl()).build();
+                                sheet.show();
+                            }
+                        }, 200);
                         break;
                     case R.id.save:
                         Toast.makeText(getActivity(), "正在保存，请稍后...", Toast.LENGTH_SHORT).show();
-                        ScreenShot.savePic(ScreenShot.getRecyclerViewScreenshot(mRecyclerView, list), newsItem.getTitle() + ".png");
-                        Toast.makeText(getActivity(), "保存成功，文件位于/sdcard/zafu_news/" + newsItem.getTitle() + ".png", Toast.LENGTH_SHORT).show();
+                        v.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ScreenShot.savePic(ScreenShot.getRecyclerViewScreenshot(mRecyclerView, list), newsItem.getTitle() + ".png");
+                                Toast.makeText(getActivity(), "保存成功，文件位于/sdcard/zafu_news/" + newsItem.getTitle() + ".png", Toast.LENGTH_SHORT).show();
+                            }
+                        }, 200);
                         break;
                 }
             }

@@ -43,6 +43,9 @@ import cn.edu.zafu.news.zxing.view.ViewfinderView;
  */
 public class CaptureFragment extends ToolbarFragment implements SurfaceHolder.Callback {
 
+
+
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -50,9 +53,9 @@ public class CaptureFragment extends ToolbarFragment implements SurfaceHolder.Ca
         Window window = getActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         hasSurface = false;
-
         inactivityTimer = new InactivityTimer(getActivity());
         beepManager = new BeepManager(getActivity());
+
     }
 
     @Nullable
@@ -198,11 +201,12 @@ public class CaptureFragment extends ToolbarFragment implements SurfaceHolder.Ca
         //这里处理解码完成后的结果，此处将参数回传到Activity处理
         if (fromLiveScan) {
             // Toast.makeText(CaptureActivity.this, "扫描成功", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
+            final Intent intent = new Intent();
             intent.putExtra("codedContent", rawResult.getText());
             intent.putExtra("codedBitmap", barcode);
             setFragmentResult(Activity.RESULT_OK, intent);
             popToBack();
+
         }
 
     }

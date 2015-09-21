@@ -60,12 +60,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".zxing.android.CaptureActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-
-
     </application>
 
 </manifest>

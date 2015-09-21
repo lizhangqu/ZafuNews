@@ -1,5 +1,10 @@
 <resources>
     <style name="AppTheme" parent="@style/AppBaseTheme"></style>
+    <style name="MyDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
     <!-- Base application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- 状态栏和标题栏颜色-->

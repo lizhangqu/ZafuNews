@@ -19,11 +19,11 @@ public class MainActivity extends BaseActivity {
         openPage("main", null, CoreAnim.none);
 
         UpdateConfig.setDebug(true);
+        UpdateConfig.setDeltaUpdate(false);
         UmengUpdateAgent.setUpdateCheckConfig(false);
         UmengUpdateAgent.setUpdateOnlyWifi(false);
+
         UmengUpdateAgent.update(this);
-       // UmengUpdateAgent.silentUpdate(this);
-        //UmengUpdateAgent.forceUpdate(this);
     }
 
     @Override

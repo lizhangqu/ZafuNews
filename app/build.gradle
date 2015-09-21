@@ -10,12 +10,12 @@ android {
         }
     }
     compileSdkVersion 22
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "cn.edu.zafu.news"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 5
+        versionCode 4
         versionName "2.0"
     }
     buildTypes {
@@ -50,11 +50,11 @@ android {
                 output.outputFile = new File(oldFile.parent, releaseApkName)
             }
             if (variant.buildType.name.equals('beta')) {
-                newName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + "-beta" + getDate() + ".apk"
+                newName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + "-beta"  + ".apk"
                 output.outputFile = new File(oldFile.parent, newName)
             }
             if (variant.buildType.name.equals('debug')) {
-                newName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + "-debug" + getDate() + ".apk"
+                newName = getProductName() + "-v${defaultConfig.versionName}-" + variant.productFlavors[0].name + "-debug"  + ".apk"
                 output.outputFile = new File(oldFile.parent, newName)
             }
         }

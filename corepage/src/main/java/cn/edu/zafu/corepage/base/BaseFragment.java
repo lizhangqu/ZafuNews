@@ -100,6 +100,14 @@ public class BaseFragment extends Fragment {
 
     }
 
+    public interface PopCallback{
+        void run();
+    }
+    public void popToBackForResult(PopCallback callback) {
+        this.popToBack(null, null);
+        callback.run();
+    }
+
     /**
      * 弹出栈顶的Fragment。如果Activity中只有一个Fragemnt时，Acitivity也退出。
      */

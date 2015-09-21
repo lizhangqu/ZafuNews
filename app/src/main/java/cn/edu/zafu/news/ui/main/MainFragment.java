@@ -29,6 +29,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -168,7 +171,8 @@ public class MainFragment extends ToolbarFragment {
                                 openPage("collect", null, CoreAnim.slide);
                                 break;
                             case R.id.update:
-                                UmengUpdateAgent.forceUpdate(getActivity());
+                                update();
+
                                 break;
                             case R.id.clear:
                                 clear();
@@ -186,6 +190,43 @@ public class MainFragment extends ToolbarFragment {
                 });
     }
 
+    private void update() {
+
+        UmengUpdateAgent.setUpdateAutoPopup(false);
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+            @Override
+            public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+                switch (updateStatus) {
+                    case UpdateStatus.Yes: // has update
+                        UmengUpdateAgent.showUpdateDialog(getActivity(), updateInfo);
+                       /* new AlertDialog.Builder(getActivity(),R.style.MyDialog)
+                                .setTitle("发现新版本")
+                                .setView(R.layout.dialog_update)
+                                .setMessage(updateInfo.version+"\n"+updateInfo.updateLog)
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(getActivity(), "更新清成功！", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).show();*/
+
+                        break;
+                    case UpdateStatus.No: // has no update
+                        Toast.makeText(getActivity(), "您的版本已经是最新版", Toast.LENGTH_SHORT).show();
+                        break;
+                    case UpdateStatus.NoneWifi: // none wifi
+                        Toast.makeText(getActivity(), "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
+                        break;
+                    case UpdateStatus.Timeout: // time out
+                        Toast.makeText(getActivity(), "超时", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        UmengUpdateAgent.forceUpdate(getActivity());
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
@@ -200,10 +241,6 @@ public class MainFragment extends ToolbarFragment {
 
             openPage("search",null,CoreAnim.slide);
         } else if (id == R.id.action_qrcode) {
-            /*Intent intent = new Intent(getActivity(),
-                    CaptureActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SCAN);*/
-
             openPageForResult(true,"scan",null,CoreAnim.slide,REQUEST_CODE_SCAN);
         }
         return super.onOptionsItemSelected(item);
@@ -224,7 +261,7 @@ public class MainFragment extends ToolbarFragment {
                     item.setUrl(temp[1]);
                     item.setTitle(temp[2]);
                     bundle.putSerializable("news_item", item);
-                    openPage("newscontent",bundle, CoreAnim.slide,true);
+                    openPage("newscontent", bundle, CoreAnim.slide);
                 }else{
                     Toast.makeText(getActivity(), "非法二维码，请使用新闻网客户端生成的二维码！", Toast.LENGTH_LONG).show();
                 }
