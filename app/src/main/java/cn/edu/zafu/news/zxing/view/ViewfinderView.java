@@ -33,8 +33,8 @@ import com.google.zxing.ResultPoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.edu.zafu.news.zxing.camera.CameraManager;
 import cn.edu.zafu.news.R;
+import cn.edu.zafu.news.zxing.camera.CameraManager;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder
@@ -70,7 +70,30 @@ public final class ViewfinderView extends View {
 	private final int SCAN_VELOCITY = 5;
 	// 扫描线
 	Bitmap scanLight;
+	/**
+	 * 将px值转化为dip值
+	 *
+	 * @param context 上下文
+	 * @param pxValue px的值
+	 * @return dip的值
+	 */
+	public static int px2dip(Context context, float pxValue) {
+		float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (pxValue / scale + 0.5f);
+	}
 
+
+	/**
+	 * 将dip的值转化为px值
+	 *
+	 * @param context  上下文
+	 * @param dipValue dip的值
+	 * @return px的值
+	 */
+	public static int dip2px(Context context, float dipValue) {
+		float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dipValue * scale + 0.5f);
+	}
 	// This constructor is used when the class is built from an XML resource.
 	public ViewfinderView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -197,8 +220,9 @@ public final class ViewfinderView extends View {
 		paint.setColor(Color.BLUE);
 		paint.setStyle(Paint.Style.FILL);
 
-		int corWidth = 15;
-		int corLength = 45;
+		int corWidth = dip2px(getContext(), 5);
+		int corLength = dip2px(getContext(), 15);
+
 
 		// 左上角
 		canvas.drawRect(frame.left - corWidth, frame.top, frame.left, frame.top
@@ -234,9 +258,8 @@ public final class ViewfinderView extends View {
 				R.string.viewfinderview_status_text1);
 		String statusText2 = getResources().getString(
 				R.string.viewfinderview_status_text2);
-		int statusTextSize = 45;
-		int statusPaddingTop = 180;
-
+		int statusTextSize = dip2px(getContext(), 15);
+		int statusPaddingTop = dip2px(getContext(), 60);
 
 		paint.setColor(statusColor);
 		paint.setTextSize(statusTextSize);
@@ -247,7 +270,9 @@ public final class ViewfinderView extends View {
 
 		int textWidth2 = (int) paint.measureText(statusText2);
 		canvas.drawText(statusText2, (width - textWidth2) / 2, frame.top
-				- statusPaddingTop + 60, paint);
+				- statusPaddingTop + dip2px(getContext(),20), paint);
+
+
 	}
 
 	/**
@@ -268,7 +293,9 @@ public final class ViewfinderView extends View {
 			scanLineTop += SCAN_VELOCITY;
 		}
 		Rect scanRect = new Rect(frame.left, scanLineTop, frame.right,
-				scanLineTop + 30);
+				scanLineTop + dip2px(getContext(), 10));
+
+
 		canvas.drawBitmap(scanLight, null, scanRect, paint);
 	}
 

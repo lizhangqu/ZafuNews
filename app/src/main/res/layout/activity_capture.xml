@@ -3,20 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.edu.zafu.news.activity.ContentActivity">
-
-
-    <SurfaceView
-        android:id="@+id/preview_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
-    <!-- 扫描取景框 -->
-
-    <cn.edu.zafu.news.zxing.view.ViewfinderView
-        android:id="@+id/viewfinder_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_alignParentTop="true"
@@ -25,4 +11,20 @@
         android:background="?attr/colorPrimary"
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize" />
+
+    <SurfaceView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/preview_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <!-- 扫描取景框 -->
+
+    <cn.edu.zafu.news.zxing.view.ViewfinderView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/viewfinder_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+
 </RelativeLayout>
