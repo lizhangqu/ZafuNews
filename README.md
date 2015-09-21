@@ -16,4 +16,8 @@
  - 特点
 
    - 整个App页面全部由Fragment组成，主体App（不包含第三方）只有一个Activity，作为Fragment的容器，详见博客http://blog.csdn.net/sbsujjbcy/article/details/47060211
+
+ - 包结构
+
+  ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/package.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/package.png)
  
