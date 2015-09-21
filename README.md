@@ -21,3 +21,11 @@
 
   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/package.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/package.png)
  
+
+ - 效果图
+   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/1.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/1.png)
+   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/2.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/2.png)
+   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/3.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/3.png)
+   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/4.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/4.png)
+   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/5.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/5.png)
+   ![https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/6.png](https://raw.githubusercontent.com/lizhangqu/ZafuNews/version_2_0/app/picture/6.png)
