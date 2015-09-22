@@ -1,5 +1,5 @@
 
-package cn.edu.zafu.news.wxapi;
+package cn.edu.zafu.share.wxapi;
 
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 

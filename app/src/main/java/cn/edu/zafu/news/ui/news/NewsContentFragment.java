@@ -47,7 +47,7 @@ import cn.edu.zafu.news.widget.screen.ScreenShot;
  */
 public class NewsContentFragment extends ToolbarFragment implements View.OnClickListener {
     private Toolbar toolbar;
-
+    private ShareTool shareTool;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
         loadDataFromNetwork(newsItem.getUrl());
         initFAM(view);
         initRecyclerView(view);
+        shareTool=new ShareTool(getActivity(),newsItem.getTitle(),newsItem.getUrl());
         return view;
 
     }
@@ -239,7 +240,13 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
 
                         break;
                     case R.id.share:
-                        ShareTool shareTool=new ShareTool(getActivity(),newsItem.getTitle(),newsItem.getUrl());
+                        v.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                shareTool.share(getActivity());
+                            }
+                        }, 200);
+
                         break;
                     case R.id.save:
                         Toast.makeText(getActivity(), "正在保存，请稍后...", Toast.LENGTH_SHORT).show();
