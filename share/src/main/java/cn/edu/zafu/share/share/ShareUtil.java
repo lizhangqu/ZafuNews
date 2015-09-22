@@ -18,7 +18,6 @@ import com.umeng.socialize.media.TencentWbShareContent;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sso.EmailHandler;
 import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.socialize.sso.SmsHandler;
 import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
@@ -141,7 +140,7 @@ public class ShareUtil {
         // 添加email平台
         addEmail();
         // 添加新浪SSO授权
-        mController.getConfig().setSsoHandler(new SinaSsoHandler());
+        //mController.getConfig().setSsoHandler(new SinaSsoHandler());
         // 添加腾讯微博SSO授权
         //mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
          // 添加人人网SSO授权
