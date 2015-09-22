@@ -40,13 +40,13 @@ import java.util.Date;
 
 import cn.edu.zafu.corepage.core.CoreAnim;
 import cn.edu.zafu.news.R;
-import cn.edu.zafu.news.net.NewsOkHttpClient;
-import cn.edu.zafu.news.net.parser.impl.WeatherParser;
 import cn.edu.zafu.news.db.dao.BaseDao;
 import cn.edu.zafu.news.db.helper.DatabaseHelper;
 import cn.edu.zafu.news.db.model.History;
 import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.model.weather.Weather;
+import cn.edu.zafu.news.net.NewsOkHttpClient;
+import cn.edu.zafu.news.net.parser.impl.WeatherParser;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
 import cn.edu.zafu.news.ui.main.adapter.NewsPagerAdapter;
 
@@ -172,11 +172,12 @@ public class MainFragment extends ToolbarFragment {
                                 break;
                             case R.id.update:
                                 update();
-
                                 break;
                             case R.id.clear:
                                 clear();
-
+                                break;
+                            case R.id.feedback:
+                                openPage("feedback", null, CoreAnim.slide);
                                 break;
                             case R.id.about:
                                 openPage("about", null, CoreAnim.slide);
@@ -189,6 +190,8 @@ public class MainFragment extends ToolbarFragment {
                     }
                 });
     }
+
+
 
     private void update() {
 

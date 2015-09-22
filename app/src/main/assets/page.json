@@ -33,5 +33,10 @@
     "name": "scan",
     "class": "cn.edu.zafu.news.zxing.android.CaptureFragment",
     "params": ""
+  },
+  {
+    "name": "feedback",
+    "class": "cn.edu.zafu.news.ui.feedback.FeedbackFragment",
+    "params": ""
   }
 ]

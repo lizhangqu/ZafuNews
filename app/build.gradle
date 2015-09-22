@@ -19,7 +19,7 @@ android {
         applicationId "cn.edu.zafu.news"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 6
+        versionCode 5
         versionName "2.0"
     }
     buildTypes {
@@ -94,6 +94,7 @@ dependencies {
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.5-RELEASE'
     compile 'com.github.clans:fab:1.5.0'
     compile project(':share')
+    compile project(':feedback')
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
