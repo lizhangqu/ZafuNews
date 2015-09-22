@@ -6,7 +6,6 @@ import android.os.Message;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +33,10 @@ import cn.edu.zafu.news.db.model.NewsItem;
 import cn.edu.zafu.news.model.NewsContent;
 import cn.edu.zafu.news.net.NewsOkHttpClient;
 import cn.edu.zafu.news.net.parser.impl.ContentParser;
-import cn.edu.zafu.news.share.ShareTool;
 import cn.edu.zafu.news.ui.app.ToolbarFragment;
 import cn.edu.zafu.news.ui.news.adapter.NewsContentAdapter;
 import cn.edu.zafu.news.widget.screen.ScreenShot;
+import cn.edu.zafu.share.share.ShareUtil;
 
 /**
  * User: lizhangqu(513163535@qq.com)
@@ -46,15 +45,12 @@ import cn.edu.zafu.news.widget.screen.ScreenShot;
  * FIXME
  */
 public class NewsContentFragment extends ToolbarFragment implements View.OnClickListener {
-    private Toolbar toolbar;
-    private ShareTool shareTool;
+    private ShareUtil mShareUtil;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getParams();
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newscontent, container, false);
@@ -62,7 +58,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
         loadDataFromNetwork(newsItem.getUrl());
         initFAM(view);
         initRecyclerView(view);
-        shareTool=new ShareTool(getActivity(),newsItem.getTitle(),newsItem.getUrl());
+        mShareUtil =new ShareUtil(getActivity(),newsItem.getTitle(),newsItem.getUrl());
         return view;
 
     }
@@ -243,7 +239,7 @@ public class NewsContentFragment extends ToolbarFragment implements View.OnClick
                         v.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                shareTool.share(getActivity());
+                                mShareUtil.share(getActivity());
                             }
                         }, 200);
 

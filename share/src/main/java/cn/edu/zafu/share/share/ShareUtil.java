@@ -1,4 +1,4 @@
-package cn.edu.zafu.news.share;
+package cn.edu.zafu.share.share;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,22 +27,21 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.umeng.socialize.ynote.controller.UMYNoteHandler;
 import com.umeng.socialize.ynote.media.YNoteShareContent;
 
-import cn.edu.zafu.news.R;
+import cn.edu.zafu.share.R;
+
 
 /**
  * User:lizhangqu(513163535@qq.com)
  * Date:2015-09-21
  * Time: 16:57
  */
-public class ShareTool {
-
+public class ShareUtil {
+    public static final String DESCRIPTOR="com.umeng.share";
     private final UMSocialService mController = UMServiceFactory
-            .getUMSocialService("com.umeng.share");
-
-
-    public ShareTool(Activity context,String title,String content){
+            .getUMSocialService(DESCRIPTOR);
+    public ShareUtil(Activity context, String title, String url){
         addCustomPlatforms(context);
-        setShareContent(context, title, content);
+        setShareContent(context, title, url);
     }
 
     public void share(Activity context){
@@ -51,77 +50,77 @@ public class ShareTool {
     /**
      * 根据不同的平台设置不同的分享内容</br>
      */
-    private void setShareContent(Activity context,String title,String content) {
+    private void setShareContent(Activity context,String title,String url) {
         UMImage localImage = new UMImage(context, R.drawable.share);
         // 设置QQ空间分享内容
         QZoneShareContent qzone = new QZoneShareContent();
-        qzone.setShareContent(title + "|" + content);
-        qzone.setTargetUrl(content);
+        qzone.setShareContent(title + "|" + url);
+        qzone.setTargetUrl(url);
         qzone.setTitle(title);
         qzone.setShareMedia(localImage);
         mController.setShareMedia(qzone);
 
         //QQ
         QQShareContent qqShareContent = new QQShareContent();
-        qqShareContent.setShareContent(title + "|" + content);
+        qqShareContent.setShareContent(title + "|" + url);
         qqShareContent.setTitle(title);
-        qqShareContent.setTargetUrl(content);
+        qqShareContent.setTargetUrl(url);
         qqShareContent.setShareMedia(localImage);
         mController.setShareMedia(qqShareContent);
 
         //微信好友
 
         WeiXinShareContent weixinContent = new WeiXinShareContent();
-        weixinContent.setShareContent(title + "|" + content);
+        weixinContent.setShareContent(title + "|" + url);
         weixinContent.setTitle(title);
-        weixinContent.setTargetUrl(content);
+        weixinContent.setTargetUrl(url);
         weixinContent.setShareMedia(localImage);
         mController.setShareMedia(weixinContent);
 
         // 设置朋友圈分享的内容
         CircleShareContent circleMedia = new CircleShareContent();
-        circleMedia.setShareContent(title + "|" + content);
+        circleMedia.setShareContent(title + "|" + url);
         circleMedia.setTitle(title);
         circleMedia.setShareMedia(localImage);
-        circleMedia.setTargetUrl(content);
+        circleMedia.setTargetUrl(url);
         mController.setShareMedia(circleMedia);
 
         // 人人
         RenrenShareContent renrenShareContent = new RenrenShareContent();
-        renrenShareContent.setShareContent(title+"|"+content);
-        mController.setAppWebSite(SHARE_MEDIA.RENREN,content);
+        renrenShareContent.setShareContent(title+"|"+url);
+        mController.setAppWebSite(SHARE_MEDIA.RENREN,url);
         mController.setShareMedia(renrenShareContent);
 
         //微博
         TencentWbShareContent tencent = new TencentWbShareContent();
-        tencent.setShareContent(title+"|"+content);
+        tencent.setShareContent(title+"|"+url);
         mController.setShareMedia(tencent);
 
         // 邮件
         MailShareContent mail = new MailShareContent();
         mail.setTitle(title);
-        mail.setShareContent(content);
+        mail.setShareContent(url);
         mController.setShareMedia(mail);
 
         // 短信
         SmsShareContent sms = new SmsShareContent();
-        sms.setShareContent(title+"|"+content);
+        sms.setShareContent(title+"|"+url);
         mController.setShareMedia(sms);
 
         //豆瓣
         DoubanShareContent doubanShareContent=new DoubanShareContent();
-        doubanShareContent.setShareContent(title+"|"+content);
+        doubanShareContent.setShareContent(title+"|"+url);
         mController.setShareMedia(doubanShareContent);
 
         //有道云笔记
         YNoteShareContent yNoteShareContent = new YNoteShareContent();
         yNoteShareContent.setTitle(title);
-        yNoteShareContent.setShareContent(content);
+        yNoteShareContent.setShareContent(url);
         mController.setShareMedia(yNoteShareContent);
 
 
         // 印象笔记
-        EvernoteShareContent shareContent = new EvernoteShareContent(title+"|"+content);
+        EvernoteShareContent shareContent = new EvernoteShareContent(title+"|"+url);
         mController.setShareMedia(shareContent);
     }
 
