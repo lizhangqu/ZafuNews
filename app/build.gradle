@@ -19,7 +19,7 @@ android {
         applicationId "cn.edu.zafu.news"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 4
+        versionCode 6
         versionName "2.0"
     }
     buildTypes {
