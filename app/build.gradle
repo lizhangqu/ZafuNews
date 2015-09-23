@@ -19,7 +19,7 @@ android {
         applicationId "cn.edu.zafu.news"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 5
+        versionCode 6
         versionName "2.0"
     }
     buildTypes {
@@ -95,6 +95,19 @@ dependencies {
     compile 'com.github.clans:fab:1.5.0'
     compile project(':share')
     compile project(':feedback')
+
+
+
+    //zafuCompile files('weixin/SocialSDK_WeiXin_1.jar')
+    //zafuCompile files('weixin/SocialSDK_WeiXin_2.jar')
+
+   // wandoujiaCompile files('weixin/SocialSDK_WeiXin_1.jar')
+    //wandoujiaCompile files('weixin/SocialSDK_WeiXin_2.jar')
+
+    compile files('weixin/SocialSDK_WeiXin_1.jar')
+    compile files('weixin/SocialSDK_WeiXin_2.jar')
+
+
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"

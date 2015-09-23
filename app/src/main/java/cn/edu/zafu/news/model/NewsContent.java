@@ -9,6 +9,7 @@ public class NewsContent{
     public static final int TYPE_INFO=0x02;
     public static final int TYPE_IMAGE=0x03;
     public static final int TYPE_PARAM=0x04;
+    public static final int TYPE_FILE=0x05;
     private int type;
     private String content;
 

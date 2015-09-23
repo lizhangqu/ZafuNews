@@ -67,22 +67,30 @@ public class ShareUtil {
         qqShareContent.setShareMedia(localImage);
         mController.setShareMedia(qqShareContent);
 
-        //微信好友
 
-        WeiXinShareContent weixinContent = new WeiXinShareContent();
-        weixinContent.setShareContent(title + "|" + url);
-        weixinContent.setTitle(title);
-        weixinContent.setTargetUrl(url);
-        weixinContent.setShareMedia(localImage);
-        mController.setShareMedia(weixinContent);
+        try {
+            Class<?> aClass = Class.forName("com.umeng.socialize.weixin.media.WeiXinShareContent");
+            if (aClass!=null){
+                //微信好友
+                WeiXinShareContent weixinContent = new WeiXinShareContent();
+                weixinContent.setShareContent(title + "|" + url);
+                weixinContent.setTitle(title);
+                weixinContent.setTargetUrl(url);
+                weixinContent.setShareMedia(localImage);
+                mController.setShareMedia(weixinContent);
 
-        // 设置朋友圈分享的内容
-        CircleShareContent circleMedia = new CircleShareContent();
-        circleMedia.setShareContent(title + "|" + url);
-        circleMedia.setTitle(title);
-        circleMedia.setShareMedia(localImage);
-        circleMedia.setTargetUrl(url);
-        mController.setShareMedia(circleMedia);
+                // 设置朋友圈分享的内容
+                CircleShareContent circleMedia = new CircleShareContent();
+                circleMedia.setShareContent(title + "|" + url);
+                circleMedia.setTitle(title);
+                circleMedia.setShareMedia(localImage);
+                circleMedia.setTargetUrl(url);
+                mController.setShareMedia(circleMedia);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         // 人人
         RenrenShareContent renrenShareContent = new RenrenShareContent();
@@ -127,6 +135,7 @@ public class ShareUtil {
      * 添加所有的平台</br>
      */
     private void addCustomPlatforms(Activity activity) {
+
         // 添加微信平台
         addWXPlatform(activity);
         // 添加QQ平台
@@ -178,17 +187,25 @@ public class ShareUtil {
      * @return
      */
     private void addWXPlatform(Context context) {
-        // 注意：在微信授权的时候，必须传递appSecret
-        // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
-        String appId = "wxe65ebd97420ce551";
-        String appSecret = "9836f632d0b7cec503078c41bac3808d";
-        // 添加微信平台
-        UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
-        wxHandler.addToSocialSDK();
-        // 支持微信朋友圈
-        UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
-        wxCircleHandler.setToCircle(true);
-        wxCircleHandler.addToSocialSDK();
+        try {
+            Class<?> aClass = Class.forName("com.umeng.socialize.weixin.controller.UMWXHandler");
+            if (aClass!=null){
+                // 注意：在微信授权的时候，必须传递appSecret
+                // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
+                String appId = "wxe65ebd97420ce551";
+                String appSecret = "9836f632d0b7cec503078c41bac3808d";
+                // 添加微信平台
+                UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
+                wxHandler.addToSocialSDK();
+                // 支持微信朋友圈
+                UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
+                wxCircleHandler.setToCircle(true);
+                wxCircleHandler.addToSocialSDK();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
     /**
      * 添加印象笔记平台

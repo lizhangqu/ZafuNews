@@ -1,12 +1,15 @@
 package cn.edu.zafu.news.ui.news.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,7 +71,15 @@ public class NewsContentAdapter extends
                 itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.item_content_img, parent,false);
                 //创建ViewHolder
-                viewHolder= new ImgViewHolder(itemLayoutView);
+                viewHolder= new ImageViewHolder(itemLayoutView);
+                break;
+
+            case NewsContent.TYPE_FILE:
+                //绑定布局
+                itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.item_content_file, parent,false);
+                //创建ViewHolder
+                viewHolder= new FileHolder(itemLayoutView);
                 break;
             case NewsContent.TYPE_PARAM:
                 //绑定布局
@@ -95,14 +106,27 @@ public class NewsContentAdapter extends
                 info.setText(Html.fromHtml(list.get(position).getContent()));
                 break;
             case NewsContent.TYPE_IMAGE:
-                ImageView imageView=((ImgViewHolder) viewHolder).img;
-
+                ImageView imageView=((ImageViewHolder) viewHolder).img;
                 Picasso.with(context)
                         .load(list.get(position).getContent())
                         .placeholder(R.mipmap.icon_image_default)
                         .resize(dip2px(viewHolder.itemView.getContext(),240), dip2px(viewHolder.itemView.getContext(),180))
                         .centerCrop()
                         .into(imageView);
+                break;
+            case NewsContent.TYPE_FILE:
+                Button file=((FileHolder) viewHolder).file;
+                String content=list.get(position).getContent();
+                final String[] split = content.split("\\|");
+                file.setText(split[1]);
+                file.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(split[0]));
+                        v.getContext().startActivity(intent);
+                    }
+                });
                 break;
             case NewsContent.TYPE_PARAM:
                 TextView param=((TextViewHolder)viewHolder).content;
@@ -130,14 +154,23 @@ public class NewsContentAdapter extends
 
         }
     }
-    static class ImgViewHolder extends RecyclerView.ViewHolder {
+    static class ImageViewHolder extends RecyclerView.ViewHolder {
         public ImageView img;
 
-        public ImgViewHolder(View itemLayoutView) {
+        public ImageViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             img = (ImageView) itemLayoutView.findViewById(R.id.img);
 
 
+        }
+    }
+
+    static class FileHolder extends RecyclerView.ViewHolder {
+        public Button file;
+
+        public FileHolder(final View itemLayoutView) {
+            super(itemLayoutView);
+            file = (Button) itemLayoutView.findViewById(R.id.file);
         }
     }
 }

@@ -8,12 +8,12 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="shoujizhushouRelease" />
+        <option name="SELECTED_BUILD_VARIANT" value="baiduRelease" />
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleShoujizhushouRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileShoujizhushouReleaseSources" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleBaiduRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileBaiduReleaseSources" />
         <afterSyncTasks>
-          <task>generateShoujizhushouReleaseSources</task>
+          <task>generateBaiduReleaseSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
@@ -24,37 +24,37 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/shoujizhushou/release" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/baidu/release" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/anzhuo/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/shoujizhushou/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/shoujizhushou/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/shoujizhushou/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/shoujizhushou/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/shoujizhushou/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/shoujizhushou/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushouRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/shoujizhushou/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestShoujizhushou/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/baidu/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/baidu/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/baidu/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/baidu/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/baidu/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/baidu/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baiduRelease/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/baidu/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -109,8 +109,8 @@
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="jsoup-1.8.3" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="ZXing-Core-3_2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
@@ -120,7 +120,9 @@
     <orderEntry type="library" exported="" name="ormlite-android-4.48" level="project" />
     <orderEntry type="library" exported="" name="ormlite-core-4.48" level="project" />
     <orderEntry type="library" exported="" name="materialloadingprogressbar-0.5.5-RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="SocialSDK_WeiXin_1" level="project" />
     <orderEntry type="library" exported="" name="systembartint-1.0.3" level="project" />
+    <orderEntry type="library" exported="" name="SocialSDK_WeiXin_2" level="project" />
     <orderEntry type="library" exported="" name="analytics-5.5.3" level="project" />
     <orderEntry type="library" exported="" name="design-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="fab-1.5.0" level="project" />

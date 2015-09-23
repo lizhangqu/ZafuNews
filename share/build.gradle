@@ -19,6 +19,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'
+    provided files('weixin/SocialSDK_WeiXin_1.jar')
+    provided files('weixin/SocialSDK_WeiXin_2.jar')
 }
